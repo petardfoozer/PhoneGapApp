@@ -119,6 +119,105 @@
     			saveToDoList();
 		}		
 
+		function viewSelectedRow(todoTextField)
+		{
+			alert(todoTextField.value);
+		}
+
+
+		function deleteSelectedRow(deleteButton)
+		{
+
+			var p = deleteButton.parentNode.parentNode.;
+			p.parentNode.removeChild(p);
+			saveToDoList();
+		}
+
+
+		//remove completed tasks
+		function removeCompletedTasks()
+		{
+			var table = document.getElementById("dataTable");
+			var rowCount = table.rows.length;
+
+			//loop through all rows of the table
+
+			for(var i = 0; i < rowCount; i++)
+			{
+
+				//if the checkbox is checked, delete the row
+				var row = table.rows[i];
+				var chkbox = row.cells[0].childNodes[0];
+				if(null != chkbox && true == chkbox.checked)
+				{
+					table.deleteRow(i);
+					rowCount--;
+					i--;
+				}
+			}
+
+			//save the to-do list
+			saveToDoList();
+
+			alert("Completed Tasks Were Removed Successfully.");
+
+		}
+
+
+		//save the to-do list
+
+		function saveToDoList()
+		{
+
+
+			var todoArray{};
+			var checkBoxState = 0;
+			var textValue = "";
+
+			var table = document.getElementById("dataTable");
+			var rowCount = table.rows.length;
+
+			if(rowCount != 0)
+			{
+
+				//loop through all rows of the table
+				for(var i = 0; i < rowCount; i++)
+				{
+
+					var row = table.rows[i];
+
+					var chkbox = row.cells[0].childNodes[0];
+					if(null != chkbox && true == chkbox.checked)
+					{
+						checkBoxState=1;
+					}
+					else
+					{
+						checkBoxState=0;
+					}
+
+					//retrieve the content of the to-do
+					var textbox = row.cells[1].childNodes[0];
+					textValue = textbox.value;
+
+					//populate the array
+					todoArray["row" + i] = 
+					{
+						check : checkBoxState,
+						text : textValue
+					};
+				}
+
+			}
+
+			else
+			{
+				todoArray = null;
+			}
+
+			//use the local storage API to persist the data as JSON
+			window.localStorage.setItem("todoList", JSON.stringify(todoArray));
+		}
 
 		</script>
 	

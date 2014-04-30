@@ -219,6 +219,22 @@
 			window.localStorage.setItem("todoList", JSON.stringify(todoArray));
 		}
 
+		function loadToDoList()
+		{
+
+			//use the local storage API load the JSON formatted to-do list, and decode it
+			var theList = JSON.parse(window.localStorage.getItem("todoList"));
+
+			if(null == theList || theList == "null")
+			{
+				deleteAllRows();
+			}
+			else
+			{
+
+
+
+
 		</script>
 	
 
@@ -231,6 +247,9 @@
 	<input type="button" value="Remove Completed Tasks"/>
 
 	<br/><br/>
+
+
+	<p> TEST TEST TEST TEST </p>
 
 	<table id="dataTable" width="100%" border="1">
 

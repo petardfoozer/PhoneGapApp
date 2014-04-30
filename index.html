@@ -231,9 +231,46 @@
 			}
 			else
 			{
+				var count = 0;
+				for(var obj in theList)
+				{
+					count++;
+				}
 
+			//remove any existing rows from the table
+			deleteAllRows();
 
+			//loop through the to-dos
+			for(var i = 0; i < count; i++)
+			{
 
+				//adding a row to the table for each one
+				addTableRow(theList["row" + i], true);
+			}
+			}
+		}
+
+		//delete all the rows
+
+		function deleteAllRows()
+		{
+
+			var table = document.getElementsById("dataTable");
+			var rowCount = table.rows.length;
+
+			//loop through all rows of the table
+			for(var i = 0; i < rowCount; i++)
+			{
+
+				//delete the row
+				table.deleteRow(i);
+				rowCount--;
+				i--;
+			}
+
+			//save the to-do list
+			saveToDoList();
+		}
 
 		</script>
 	
@@ -241,15 +278,13 @@
 
 	</head>
 
-	<body>
+	<body onload="loadToDoList()">
 
-	<input type="button" value="Add To-Do"/>
-	<input type="button" value="Remove Completed Tasks"/>
+	<input type="button" value="Add To-Do" onclick="createNewToDo()"/>
+	<input type="button" value="Remove Completed Tasks" onclick="removeCompletedTasks()"/>
 
 	<br/><br/>
 
-
-	<p> TEST TEST TEST TEST </p>
 
 	<table id="dataTable" width="100%" border="1">
 
